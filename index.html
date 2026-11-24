@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLÉA — Cinematic 3D Artisan Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="preloader">
+    <div class="preload-brand">SOLÉA</div>
+    <div id="preload-sub" class="preload-sub">Preparing the afternoon light...</div>
+    <div class="preload-bar-track"><div id="preload-fill" class="preload-bar-fill"></div></div>
+    <div id="preload-pct" class="preload-pct">0%</div>
+  </div>
+
+  <div id="stage-wrap">
+    <canvas id="scene-canvas"></canvas>
+    <div class="vignette"></div>
+    <div id="hotspot-layer"></div>
+  </div>
+
+  <header class="top-bar">
+    <div class="top-left">
+      <button id="brand-pill" class="brand-pill" type="button">
+        <span class="brand-dot"></span>
+        <span id="brand-name" class="brand-name">SOLÉA</span>
+        <span id="brand-tag" class="brand-tag">Artisan Cafe &amp; Patisserie</span>
+      </button>
+      <button id="back-btn" class="nav-btn hidden-el" type="button"></button>
+      <button id="switch-btn" class="nav-btn accent hidden-el" type="button"></button>
+    </div>
+
+    <div class="top-right">
+      <div class="lang-switcher" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" data-lang="ru" type="button">RU</button>
+        <button class="lang-btn" data-lang="ar" type="button">AR</button>
+        <button class="lang-btn" data-lang="fa" type="button">FA</button>
+      </div>
+      <button id="cart-open-btn" class="cart-btn" type="button">
+        <span id="cart-label">Bag</span>
+        <span id="cart-badge" class="cart-badge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="scene-banner"></div>
+
+  <section id="intro-ui">
+    <div></div>
+    <div class="hero-center">
+      <span id="hero-kicker" class="hero-kicker">SOLÉA PATISSERIE</span>
+      <h1 id="hero-title" class="hero-title">Afternoon warmth, behind tall glass</h1>
+      <p id="hero-sub" class="hero-sub">Step off the sunlit street into our artisan bakery &amp; specialty roastery.</p>
+    </div>
+    <div class="scroll-cue-wrap">
+      <button id="scroll-pill" class="scroll-pill" type="button">
+        <span class="scroll-mouse"></span>
+        <span id="scroll-cue-text">Scroll or click to step inside</span>
+      </button>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="progress-track"><div id="intro-progress" class="progress-fill"></div></div>
+        <button id="enter-btn" class="nav-btn accent" type="button">Enter Cafe</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="hub-ui">
+    <h2 id="hub-heading" class="hub-heading">What are you craving today?</h2>
+    <div class="hub-cards">
+      <button id="card-vitrine" class="hub-card" type="button">
+        <img id="hub-vitrine-img" class="hub-photo" src="" alt="Pastry Vitrine">
+        <div id="hub-vitrine-title" class="hub-card-title">Pastry Vitrine</div>
+        <div id="hub-vitrine-desc" class="hub-card-desc">Explore 8 freshly baked tarts, croissants &amp; cakes</div>
+      </button>
+      <button id="card-bar" class="hub-card" type="button">
+        <img id="hub-bar-img" class="hub-photo" src="" alt="Coffee Bar">
+        <div id="hub-bar-title" class="hub-card-title">Coffee Bar</div>
+        <div id="hub-bar-desc" class="hub-card-desc">Single-origin espresso, signatures &amp; artisanal teas</div>
+      </button>
+      <button id="card-table" class="hub-card" type="button">
+        <img id="hub-table-img" class="hub-photo" src="" alt="Chef's Table">
+        <div id="hub-table-title" class="hub-card-title">Chef's Table</div>
+        <div id="hub-table-desc" class="hub-card-desc">Interactive 3D menu of hot dishes at your table</div>
+      </button>
+    </div>
+  </section>
+
+  <div id="pastry-popup" role="dialog" aria-modal="false">
+    <div class="popup-head">
+      <img id="popup-img" src="" alt="Pastry">
+      <div>
+        <div id="popup-title" class="popup-title"></div>
+        <div id="popup-price" class="popup-price"></div>
+      </div>
+    </div>
+    <p id="popup-desc" class="popup-desc"></p>
+    <div class="popup-actions">
+      <button id="popup-add-btn" class="btn-primary" type="button">Add to Bag</button>
+      <button id="popup-close-btn" class="btn-close-sm" type="button" aria-label="Close">×</button>
+    </div>
+  </div>
+
+  <div id="vitrine-bar">
+    <div id="pastry-strip" class="pastry-strip"></div>
+  </div>
+
+  <div id="table-bar">
+    <div class="table-active-card">
+      <div class="table-active-info">
+        <div id="table-dish-title" class="table-active-title"></div>
+        <div id="table-dish-desc" class="table-active-desc"></div>
+      </div>
+      <div class="table-active-actions">
+        <span id="table-dish-price" class="table-price-tag">$18.50</span>
+        <button id="table-play-btn" class="table-play-btn" type="button">▶ Play All</button>
+        <button id="table-add-btn" class="table-add-btn" type="button">Add to Bag</button>
+      </div>
+    </div>
+    <div id="table-strip" class="pastry-strip"></div>
+  </div>
+
+  <aside id="bar-drawer">
+    <div id="bar-drawer-head" class="bar-drawer-head"><div class="bar-drawer-toggle"></div>
+      <div id="bar-drawer-title" class="bar-drawer-title">Select Your Drinks</div>
+      <div id="bar-tabs" class="bar-tabs"></div>
+    </div>
+    <div id="bar-list" class="bar-list"></div>
+  </aside>
+
+  <div id="cart-backdrop"></div>
+  <aside id="cart-drawer">
+    <div class="cart-head">
+      <h3 id="cart-title">Your Bag</h3>
+      <button id="cart-close-btn" class="cart-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-foot">
+      <div class="cart-total-row">
+        <span id="cart-subtotal-label">Subtotal</span>
+        <span id="cart-total-val">$0.00</span>
+      </div>
+      <button id="checkout-btn" class="checkout-btn" type="button" disabled>Place Order</button>
+    </div>
+  </aside>
+
+  <div id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
